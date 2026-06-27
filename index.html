@@ -1,121 +1,59 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cocktail Explorer</title>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
-
+    <title>Cocktail DB - SDP Assignment 02</title>
     <link rel="stylesheet" href="style.css">
+<base target="_blank">
 </head>
-
 <body>
-
-    <header class="bg-dark text-white text-center py-4">
-        <h1>Cocktail Explorer</h1>
-        <p>Search and Add Your Favorite Drinks</p>
-    </header>
-    <section class="container my-4">
-
-        <div class="row justify-content-center">
-
-            <div class="col-md-8">
-                <input
-                    type="text"
-                    id="searchInput"
-                    class="form-control"
-                    placeholder="Search Drink Name...">
-            </div>
-
-            <div class="col-md-2">
-                <button
-                    class="btn btn-primary w-100"
-                    onclick="searchDrink()">
-                    Search
-                </button>
-            </div>
-
-        </div>
-
-    </section>
-
-    <div class="container">
-
-        <div class="row">
-
-            <div class="col-lg-8">
-
-                <div id="drinkContainer" class="row g-4">
-
-                </div>
-
-            </div>
-
-            <div class="col-lg-4">
-
-                <div class="group-box">
-
-                    <h3 class="text-center">
-                        Selected Drinks
-                    </h3>
-
-                    <hr>
-
-                    <h5>
-                        Total Selected :
-                        <span id="count">0</span>
-                    </h5>
-
-                    <div id="groupContainer">
-
-                    </div>
-
-                </div>
-
-            </div>
-
-        </div>
-
+    <div class="header">
+        <h1>🍹 Cocktail DB Explorer</h1>
+        <p>Discover your favorite cocktails</p>
     </div>
 
-    <div class="modal fade"
-        id="detailsModal"
-        tabindex="-1">
-
-        <div class="modal-dialog modal-lg">
-
-            <div class="modal-content">
-
-                <div class="modal-header">
-
-                    <h4 class="modal-title">
-                        Drink Details
-                    </h4>
-
-                    <button
-                        class="btn-close"
-                        data-bs-dismiss="modal">
-                    </button>
-
-                </div>
-
-                <div
-                    class="modal-body"
-                    id="modalBody">
-
-                </div>
-
-            </div>
-
-        </div>
-
+    <div class="search-container">
+        <input type="text" id="searchInput" placeholder="Search for a cocktail (e.g., Margarita, Mojito)...">
+        <button id="searchBtn">🔍 Search</button>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <div class="main-layout">
+        <div class="drinks-section">
+            <h2 class="section-title">🍸 Drinks</h2>
+            <div id="drinksContainer" class="drinks-grid">
+                <div class="loading">
+                    <div class="spinner"></div>
+                    <p>Loading cocktails...</p>
+                </div>
+            </div>
+        </div>
 
-    <script src="app.js"></script>
+        <div class="group-section">
+            <div class="group-panel">
+                <h2 class="section-title">📋 My Group</h2>
+                <div class="group-count">Drinks in group: <span id="groupCount">0</span> / 7</div>
+                <div id="groupContainer">
+                    <div class="empty-group">No drinks added yet.<br>Click "Add to Group" to add drinks!</div>
+                </div>
+            </div>
+        </div>
+    </div>
 
+    <div id="modalOverlay" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <img id="modalImage" src="" alt="">
+                <button class="modal-close" id="modalCloseBtn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <h2 id="modalTitle" class="modal-title"></h2>
+                <p id="modalCategory" class="modal-category"></p>
+                <div id="modalDetails"></div>
+            </div>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
-
 </html>
