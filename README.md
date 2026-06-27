@@ -1,5 +1,5 @@
 # Assignment-02
-
+Live Demon Link : https://swejahid.github.io/Assignment-02/
 A responsive JavaScript project that uses the CocktailDB API to search and display drinks.
 
 ## Features
