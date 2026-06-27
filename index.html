@@ -6,39 +6,53 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cocktail Explorer</title>
 
-    <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
 
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-    <header class="bg-dark text-white text-center py-4">
-        <h1>Cocktail Explorer</h1>
-        <p>Search and Add Your Favorite Drinks</p>
-    </header>
+    <header class="bg-primary text-white py-4 shadow">
 
+        <div class="container">
+
+            <h1 class="text-center fw-bold">
+                🍹 Cocktail Explorer
+            </h1>
+
+            <p class="text-center mb-0">
+                Search your favorite drinks from CocktailDB API
+            </p>
+
+        </div>
+
+    </header>
 
     <section class="container my-4">
 
         <div class="row justify-content-center">
 
-            <div class="col-md-8">
+            <div class="col-md-9">
+
                 <input
-                    type="text"
                     id="searchInput"
-                    class="form-control"
+                    type="text"
+                    class="form-control form-control-lg"
                     placeholder="Search Drink Name...">
+
             </div>
 
-            <div class="col-md-2">
+            <div class="col-md-3">
+
                 <button
-                    class="btn btn-primary w-100"
+                    class="btn btn-primary btn-lg w-100"
                     onclick="searchDrink()">
+
                     Search
+
                 </button>
+
             </div>
 
         </div>
@@ -49,34 +63,58 @@
 
         <div class="row">
 
-            <!-- Drink Cards -->
-
             <div class="col-lg-8">
 
-                <div id="drinkContainer" class="row g-4">
+                <h3 class="mb-4">
+                    🍸 Available Drinks
+                </h3>
+
+                <div
+                    class="row g-4"
+                    id="drinkContainer">
 
                 </div>
 
             </div>
 
-            <!-- Selected Drinks -->
-
             <div class="col-lg-4">
 
                 <div class="group-box">
 
-                    <h3 class="text-center">
-                        Selected Drinks
-                    </h3>
+                    <div class="d-flex justify-content-between align-items-center">
+
+                        <h3 class="mb-0">
+
+                            Selected Drinks
+
+                        </h3>
+
+                        <span class="badge bg-danger fs-5">
+
+                            <span id="count">0</span>/7
+
+                        </span>
+
+                    </div>
 
                     <hr>
 
-                    <h5>
+                    <p class="fw-bold">
+
                         Total Selected :
-                        <span id="count">0</span>
-                    </h5>
+                        <span id="countText">0</span>
+
+                    </p>
 
                     <div id="groupContainer">
+
+                        <div class="empty-group">
+
+                            <h1>🍹</h1>
+
+                            <p>No drinks selected.</p>
+
+                        </div>
 
                     </div>
 
@@ -88,7 +126,8 @@
 
     </div>
 
-    <div class="modal fade"
+    <div
+        class="modal fade"
         id="detailsModal"
         tabindex="-1">
 
@@ -99,12 +138,15 @@
                 <div class="modal-header">
 
                     <h4 class="modal-title">
+
                         Drink Details
+
                     </h4>
 
                     <button
                         class="btn-close"
                         data-bs-dismiss="modal">
+
                     </button>
 
                 </div>
@@ -120,6 +162,14 @@
         </div>
 
     </div>
+
+
+    <footer class="bg-dark text-white text-center py-3 mt-5">
+
+        © 2026 Cocktail Explorer |
+        JavaScript API Assignment
+
+    </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
 
