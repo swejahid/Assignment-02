@@ -1,0 +1,173 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap');
+
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+    font-family:'Poppins',sans-serif;
+}
+
+body{
+    background:#f5f7fb;
+}
+
+header{
+    background:linear-gradient(135deg,#0d6efd,#6610f2);
+    color:white;
+}
+
+header h1{
+    font-size:40px;
+    font-weight:700;
+}
+
+header p{
+    margin-top:10px;
+    font-size:18px;
+}
+
+#searchInput{
+    height:50px;
+    font-size:18px;
+}
+
+button{
+    height:50px;
+}
+
+.card{
+    border:none;
+    border-radius:15px;
+    overflow:hidden;
+    transition:.3s;
+    box-shadow:0 8px 20px rgba(0,0,0,.1);
+}
+
+.card:hover{
+    transform:translateY(-8px);
+    box-shadow:0 15px 30px rgba(0,0,0,.2);
+}
+
+.card img{
+    height:250px;
+    object-fit:cover;
+}
+
+.card-body{
+    padding:20px;
+}
+
+.card-title{
+    font-size:22px;
+    font-weight:600;
+}
+
+.category{
+    color:#0d6efd;
+    font-weight:600;
+}
+
+.instruction{
+    color:#666;
+    margin:15px 0;
+}
+
+.btn-add{
+    background:#198754;
+    color:white;
+    border:none;
+}
+
+.btn-add:hover{
+    background:#157347;
+    color:white;
+}
+
+.btn-details{
+    background:#0d6efd;
+    color:white;
+    border:none;
+}
+
+.btn-details:hover{
+    background:#0b5ed7;
+    color:white;
+}
+.group-box{
+    background:white;
+    padding:20px;
+    border-radius:15px;
+    box-shadow:0 8px 20px rgba(0,0,0,.1);
+    position:sticky;
+    top:20px;
+}
+
+.group-box h3{
+    font-weight:700;
+}
+
+.group-item{
+    display:flex;
+    align-items:center;
+    gap:10px;
+    background:#eef2ff;
+    padding:10px;
+    margin-top:10px;
+    border-radius:10px;
+}
+
+.group-item img{
+    width:55px;
+    height:55px;
+    object-fit:cover;
+    border-radius:50%;
+}
+
+.group-item h6{
+    margin:0;
+}
+
+#count{
+    color:red;
+    font-weight:bold;
+    font-size:22px;
+}
+
+.modal-body img{
+    width:100%;
+    border-radius:12px;
+    margin-bottom:15px;
+}
+
+.no-data{
+    text-align:center;
+    width:100%;
+    font-size:28px;
+    color:red;
+    margin-top:50px;
+}
+
+@media(max-width:991px){
+
+.group-box{
+    margin-top:30px;
+    position:static;
+}
+
+}
+
+@media(max-width:768px){
+
+header h1{
+    font-size:30px;
+}
+
+header p{
+    font-size:16px;
+}
+
+.card img{
+    height:220px;
+}
+
+}
