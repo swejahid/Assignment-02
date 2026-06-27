@@ -1,21 +1,31 @@
-
 const API_URL = "https://www.thecocktaildb.com/api/json/v1/1/search.php?s=";
+const LOOKUP_URL = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
 
 let selectedDrinks = [];
 
 
-
-window.onload = function () {
+window.onload = () => {
     loadDrinks("a");
+
+    // Search when Enter key is pressed
+    document
+        .getElementById("searchInput")
+        .addEventListener("keypress", function (event) {
+
+            if (event.key === "Enter") {
+                searchDrink();
+            }
+
+        });
 };
 
 
-
-async function loadDrinks(name) {
+async function loadDrinks(searchText) {
 
     try {
 
-        const response = await fetch(API_URL + name);
+        const response = await fetch(API_URL + searchText);
+
         const data = await response.json();
 
         displayDrinks(data.drinks);
@@ -28,10 +38,12 @@ async function loadDrinks(name) {
 
 }
 
-
 function searchDrink() {
 
-    const text = document.getElementById("searchInput").value.trim();
+    const text = document
+        .getElementById("searchInput")
+        .value
+        .trim();
 
     if (text === "") {
 
@@ -45,7 +57,6 @@ function searchDrink() {
 
 }
 
-
 function displayDrinks(drinks) {
 
     const container = document.getElementById("drinkContainer");
@@ -55,12 +66,17 @@ function displayDrinks(drinks) {
     if (!drinks) {
 
         container.innerHTML = `
-            <div class="no-data">
-                No Drinks Found
-            </div>
+
+        <div class="no-data">
+
+            <h2>No Drinks Found</h2>
+
+        </div>
+
         `;
 
         return;
+
     }
 
     drinks.forEach(drink => {
@@ -71,29 +87,41 @@ function displayDrinks(drinks) {
 
             <div class="card h-100">
 
-                <img src="${drink.strDrinkThumb}" class="card-img-top">
+                <img
+                src="${drink.strDrinkThumb}"
+                class="card-img-top">
 
-                <div class="card-body d-flex flex-column">
+                <div class="card-body">
 
                     <h4 class="card-title">
+
                         ${drink.strDrink}
+
                     </h4>
 
                     <p class="category">
-                        Category : ${drink.strCategory}
+
+                        Category :
+                        ${drink.strCategory}
+
                     </p>
 
                     <p class="instruction">
+
                         ${drink.strInstructions.slice(0,15)}...
+
                     </p>
 
                     <div class="mt-auto">
 
                         <button
                         class="btn btn-add w-100 mb-2"
-                        onclick="addToGroup('${drink.idDrink}','${drink.strDrink}','${drink.strDrinkThumb}')">
+                        onclick="addToGroup(
+                        '${drink.idDrink}',
+                        '${drink.strDrink}',
+                        '${drink.strDrinkThumb}')">
 
-                            Add to Group
+                            Add To Group
 
                         </button>
 
@@ -119,9 +147,9 @@ function displayDrinks(drinks) {
 
 }
 
-function addToGroup(id, name, image) {
+function addToGroup(id,name,image){
 
-    if (selectedDrinks.length >= 7) {
+    if(selectedDrinks.length>=7){
 
         alert("You can't add more than 7 drinks!");
 
@@ -129,11 +157,11 @@ function addToGroup(id, name, image) {
 
     }
 
-    const alreadyExists = selectedDrinks.find(drink => drink.id === id);
+    const exists=selectedDrinks.find(drink=>drink.id===id);
 
-    if (alreadyExists) {
+    if(exists){
 
-        alert("This drink is already added!");
+        alert("Drink already selected!");
 
         return;
 
@@ -141,9 +169,9 @@ function addToGroup(id, name, image) {
 
     selectedDrinks.push({
 
-        id,
-        name,
-        image
+        id:id,
+        name:name,
+        image:image
 
     });
 
@@ -151,17 +179,37 @@ function addToGroup(id, name, image) {
 
 }
 
-function updateGroup() {
+function updateGroup(){
 
-    document.getElementById("count").innerText = selectedDrinks.length;
+    document.getElementById("count").innerText=selectedDrinks.length;
 
-    const group = document.getElementById("groupContainer");
+    document.getElementById("countText").innerText=selectedDrinks.length;
 
-    group.innerHTML = "";
+    const group=document.getElementById("groupContainer");
+
+    group.innerHTML="";
+
+    if(selectedDrinks.length===0){
+
+        group.innerHTML=`
+
+        <div class="empty-group">
+
+            <h1>🍹</h1>
+
+            <p>No drinks selected.</p>
+
+        </div>
+
+        `;
+
+        return;
+
+    }
 
     selectedDrinks.forEach((drink,index)=>{
 
-        group.innerHTML += `
+        group.innerHTML+=`
 
         <div class="group-item">
 
@@ -169,7 +217,11 @@ function updateGroup() {
 
             <img src="${drink.image}">
 
-            <h6>${drink.name}</h6>
+            <div>
+
+                <h6>${drink.name}</h6>
+
+            </div>
 
         </div>
 
@@ -179,46 +231,90 @@ function updateGroup() {
 
 }
 
+
 async function showDetails(id){
 
-    const response = await fetch(
+    const response=await fetch(LOOKUP_URL+id);
 
-    `https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=${id}`
+    const data=await response.json();
 
-    );
+    const drink=data.drinks[0];
 
-    const data = await response.json();
+    document.getElementById("modalBody").innerHTML=`
 
-    const drink = data.drinks[0];
+        <img
+        src="${drink.strDrinkThumb}"
+        class="img-fluid">
 
-    document.getElementById("modalBody").innerHTML = `
+        <h2 class="mt-3">
 
-        <img src="${drink.strDrinkThumb}" class="img-fluid">
+            ${drink.strDrink}
 
-        <h3>${drink.strDrink}</h3>
+        </h2>
 
         <hr>
 
-        <p><strong>Category :</strong> ${drink.strCategory}</p>
+        <p>
 
-        <p><strong>Alcoholic :</strong> ${drink.strAlcoholic}</p>
+            <strong>Category:</strong>
 
-        <p><strong>Glass :</strong> ${drink.strGlass}</p>
+            ${drink.strCategory}
 
-        <p><strong>IBA :</strong> ${drink.strIBA || "N/A"}</p>
+        </p>
 
-        <p><strong>Instructions :</strong></p>
+        <p>
 
-        <p>${drink.strInstructions}</p>
+            <strong>Alcoholic:</strong>
+
+            ${drink.strAlcoholic}
+
+        </p>
+
+        <p>
+
+            <strong>Glass:</strong>
+
+            ${drink.strGlass}
+
+        </p>
+
+        <p>
+
+            <strong>IBA:</strong>
+
+            ${drink.strIBA || "N/A"}
+
+        </p>
+
+        <p>
+
+            <strong>Instructions:</strong>
+
+        </p>
+
+        <p>
+
+            ${drink.strInstructions}
+
+        </p>
 
     `;
 
-    const modal = new bootstrap.Modal(
+    const modal=new bootstrap.Modal(
 
         document.getElementById("detailsModal")
 
     );
 
     modal.show();
+
+}
+
+
+function clearGroup(){
+
+    selectedDrinks=[];
+
+    updateGroup();
 
 }
